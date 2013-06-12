@@ -1,4 +1,4 @@
-HOWTO manage PyWPS Homepage
+HOWTO manage PyWPS Tutorial
 ===========================
 
 NOTE: before you start, you need at least pywps/trunk and pywps/docs
