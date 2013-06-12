@@ -1,0 +1,62 @@
+Content-Type: application/xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<wps:ProcessDescriptions xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsDescribeProcess_response.xsd" service="WPS" version="1.0.0" xml:lang="eng">
+    <ProcessDescription wps:processVersion="1.0" storeSupported="True" statusSupported="True">
+        <ows:Identifier>returner</ows:Identifier>
+        <ows:Title>Return process</ows:Title>
+        <ows:Abstract>This is demonstration process of PyWPS, returns
+            the same file, it gets on input, as the output.</ows:Abstract>
+        <DataInputs>
+            <Input minOccurs="1" maxOccurs="1">
+                <ows:Identifier>text</ows:Identifier>
+                <ows:Title>Some width</ows:Title>
+                <LiteralData>
+                    <ows:DataType ows:reference="http://www.w3.org/TR/xmlschema-2/#integer">integer</ows:DataType>
+                    <ows:AnyValue />
+                </LiteralData>
+            </Input>
+            <Input minOccurs="1" maxOccurs="1">
+                <ows:Identifier>data</ows:Identifier>
+                <ows:Title>Input vector data</ows:Title>
+                <ComplexData>
+                    <Default>
+                        <Format>
+                            <ows:MimeType>text/xml</ows:MimeType>
+                        </Format>
+                    </Default>
+                    <Supported>
+                        <Format>
+                            <ows:MimeType>text/xml</ows:MimeType>
+                        </Format>
+                    </Supported>
+                </ComplexData>
+            </Input>
+        </DataInputs>
+        <ProcessOutputs>
+            <Output>
+                <ows:Identifier>output</ows:Identifier>
+                <ows:Title>Output vector data</ows:Title>
+                <ComplexOutput>
+                    <Default>
+                        <Format>
+                            <ows:MimeType>text/xml</ows:MimeType>
+                        </Format>
+                    </Default>
+                    <Supported>
+                        <Format>
+                            <ows:MimeType>text/xml</ows:MimeType>
+                        </Format>
+                    </Supported>
+                </ComplexOutput>
+            </Output>
+            <Output>
+                <ows:Identifier>text</ows:Identifier>
+                <ows:Title>Output literal data</ows:Title>
+                <LiteralOutput>
+                    <ows:DataType ows:reference="http://www.w3.org/TR/xmlschema-2/#integer">integer</ows:DataType>
+                </LiteralOutput>
+            </Output>
+        </ProcessOutputs>
+    </ProcessDescription>
+</wps:ProcessDescriptions>

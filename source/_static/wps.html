@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>OpenLayers Editing Toolbar Example && WPS</title>
+        
+        <script src="http://openlayers.org/api/OpenLayers.js"></script>
+        <script src="WPS.js"></script>
+        <style type="text/css">
+            #map {
+                width :550px;
+                height :400px;
+            }
+        </style>
+        <script type="text/javascript">
+            var lon = 5;
+            var lat = 40;
+            var zoom = 5;
+            var map, layer, vlayer;
+            var wps;
+
+            function init(){
+                layer = new OpenLayers.Layer.WMS( "OpenLayers WMS",
+                        "http://labs.metacarta.com/wms/vmap0", {layers: 'basic'} );
+    
+                vlayer = new OpenLayers.Layer.Vector("Editable");
+                map = new OpenLayers.Map( 'map', {
+                    controls: [
+                        new OpenLayers.Control.PanZoom(),
+                        new OpenLayers.Control.EditingToolbar(vlayer)
+                    ]
+                });
+                map.addLayers([layer, vlayer]);
+    
+                map.setCenter(new OpenLayers.LonLat(lon, lat), zoom);
+            }
+
+
+            /*******************
+             * WPS starts here *
+             *******************/
+            var onClearClicked = function() {
+                vlayer.destroyFeatures();
+            };
+
+            // On WPS button Clicked - call the WPS Process
+            var onWPSClicked = function() {
+
+                // create the WPS object
+                var wps = new OpenLayers.WPS("http://localhost/cgi-bin/wps",{onSucceeded: onWPSSussceeded});
+
+                // define data inputs
+                var dataInput = new OpenLayers.WPS.ComplexPut({
+                    identifier:"data",
+                    value:  OpenLayers.Format.GML.prototype.write(vlayer.features)
+                    });
+                var literalInput = new OpenLayers.WPS.LiteralPut({
+                        identifier:"text",
+                        value: document.getElementById("text").value
+                    });
+
+                // define data outputs
+                var literalOutput = new OpenLayers.WPS.LiteralPut({
+                            identifier: "text"
+                        });
+                var complexOutput = new OpenLayers.WPS.ComplexPut({
+                            identifier: "output"
+                        });
+
+                // define the process with in- and outputs
+                var returnerProcess = new OpenLayers.WPS.Process({
+                        identifier: "returner",
+                        inputs: [dataInput,literalInput],
+                        outputs: [literalOutput, complexOutput] });
+
+                // register process to particular wps and execute
+                wps.addProcess(returnerProcess);
+                wps.execute("returner");
+            };
+
+            // WPS Response arrived
+            var onWPSSussceeded = function(process) {
+                var text = process.getOutput("text").getValue();
+                alert(text);
+            };
+
+            // WPS Response failed
+            var wpsFailed = function(resp) {
+            };
+
+
+        </script>
+    </head>
+    <body onload="init()">
+        <h1 id="title">Editing Toolbar Example && WPS</h1>
+        Source: <a href="http://openlayers.org/dev/examples/editingtoolbar.html">http://openlayers.org/dev/examples/editingtoolbar.html</a>
+
+        <div id="map"></div>
+
+        <div>
+            <input type="button" value="Clear" onclick="onClearClicked()"></input>
+            <input type="button" value="Returner" onclick="onWPSClicked()"></input> 
+            Text:&nbsp;<input type="text" value="2" id="text"></input>
+        </div>
+
+    </body>
+</html>

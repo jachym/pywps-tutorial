@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wps:ExecuteResponse xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsGetCapabilities_response.xsd" service="WPS" version="1.0.0" xml:lang="eng" serviceInstance="http://localhost/cgi-bin/wps?service=WPS&amp;request=GetCapabilities&amp;version=1.0.0" statusLocation="http://localhost/wps/wpsoutputs/pywps-127306721087.xml">
+    <wps:Process wps:processVersion="1.0">
+        <ows:Identifier>returner</ows:Identifier>
+        <ows:Title>Return process</ows:Title>
+        <ows:Abstract>This is demonstration process of PyWPS, returns
+            the same file, it gets on input, as the output.</ows:Abstract>
+    </wps:Process>
+    <wps:Status creationTime="Wed May  5 15:46:50 2010">
+        <wps:ProcessSucceeded>PyWPS Process returner successfully calculated</wps:ProcessSucceeded>
+    </wps:Status>
+    <wps:ProcessOutputs>
+        <wps:Output>
+            <ows:Identifier>output</ows:Identifier>
+            <ows:Title>Output vector data</ows:Title>
+            <wps:Data>
+                <wps:ComplexData mimeType="text/xml">
+<ogr:FeatureCollection
+     xmlns:ogr="http://ogr.maptools.org/"
+     xmlns:gml="http://www.opengis.net/gml">
+  <gml:boundedBy>
+    <gml:Box>
+      <gml:coord><gml:X>-559044.5280103994</gml:X><gml:Y>-1177026.734255324</gml:Y></gml:coord>
+      <gml:coord><gml:X>-554835.891394174</gml:X><gml:Y>-1169621.932698363</gml:Y></gml:coord>
+    </gml:Box>
+  </gml:boundedBy>                        
+  <gml:featureMember>
+    <ogr:features fid="F0">
+      <ogr:geometryProperty><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates>-555043.324615493183956,-1174010.838661683257669 -554930.435787564259954,-1174159.005248340079561 -555085.657925966545008,-1174293.060731505509466 -555276.157823096611537,-1174201.338558813324198 -555191.491202149889432,-1174088.449730884516612 -555043.324615493183956,-1174010.838661683257669</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></ogr:geometryProperty>
+      <ogr:areaClass>1</ogr:areaClass>
+      <ogr:classLabel>broad_leaved</ogr:classLabel>
+      <ogr:classColor>99CC00</ogr:classColor>
+      <ogr:useFeature>true</ogr:useFeature>
+      <ogr:areaNote>undefined</ogr:areaNote>
+    </ogr:features>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:features fid="F1">
+      <ogr:geometryProperty><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates>-556268.168398522422649,-1173800.583219667896628 -556204.668432812322862,-1173938.166478706290945 -556155.279570593498647,-1174036.944203144172207 -556042.390742664574645,-1174206.277445037383586 -556038.862966791726649,-1174213.332996783079579 -555834.251966170617379,-1174308.582945347996429 -555820.140862679458223,-1174326.221824711887166 -555728.418689987272955,-1174400.305118040414527 -555714.3075864961138,-1174446.166204386390746 -555731.946465860004537,-1174527.305049460381269 -555721.363138241693377,-1174597.860566915944219 -555700.196483004954644,-1174664.888308498775586 -555633.168741422239691,-1174693.110515480861068 -555477.946603019954637,-1174654.304980880348012 -555467.363275401643477,-1174643.721653262153268 -555485.002154765534215,-1174770.72158468212001 -555485.002154765534215,-1174703.693843099288642 -555544.974344602669589,-1174795.41601579147391 -555643.75206904055085,-1174798.943791664438322 -555693.140931259375066,-1174795.41601579147391 -555746.057569351163693,-1174760.138257063692436 -555784.863103951676749,-1174703.693843099288642 -555795.446431569987908,-1174657.832756753079593 -555813.085310933878645,-1174467.332859623013064 -555837.779742043348961,-1174446.166204386390746 -555908.33525949891191,-1174382.66623867652379 -555982.418552827322856,-1174326.221824711887166 -556091.779604883398861,-1174312.110721220960841 -556187.029553448432125,-1174245.082979638129473 -556282.27950201346539,-1174026.360875525744632 -556215.251760430750437,-1174192.166341546457261 -556338.723915977985598,-1173962.860909815644845 -556405.751657560700551,-1173952.277582197450101 -556444.557192161330022,-1173969.916461561340839 -556483.362726761843078,-1174008.721996161853895 -556525.69603723520413,-1173927.583151087863371 -556458.668295652489178,-1173871.138737123459578 -556395.168329942389391,-1173828.80542665021494 -556268.168398522422649,-1173800.583219667896628</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></ogr:geometryProperty>
+      <ogr:areaClass>2</ogr:areaClass>
+      <ogr:classLabel>water</ogr:classLabel>
+      <ogr:classColor>0000FF</ogr:classColor>
+      <ogr:useFeature>true</ogr:useFeature>
+      <ogr:areaNote>undefined</ogr:areaNote>
+    </ogr:features>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:features fid="F2">
+      <ogr:geometryProperty><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates>-556769.112572456593625,-1175349.27682781778276 -556735.598701665177941,-1175405.721241782419384 -556622.70987373625394,-1175365.151819245424122 -556539.80714072601404,-1175291.06852591689676 -556478.07106295239646,-1175273.429646553006023 -556425.154424860607833,-1175276.957422425970435 -556520.404373425641097,-1175225.804672270547599 -556541.571028662379831,-1175243.443551634438336 -556624.47376167261973,-1175289.304637980647385 -556659.751520400401205,-1175287.540750044165179 -556769.112572456593625,-1175349.27682781778276</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></ogr:geometryProperty>
+      <ogr:areaClass>1</ogr:areaClass>
+      <ogr:classLabel>broad_leaved</ogr:classLabel>
+      <ogr:classColor>99CC00</ogr:classColor>
+      <ogr:useFeature>true</ogr:useFeature>
+    </ogr:features>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:features fid="F3">
+      <ogr:geometryProperty><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates>-556095.307380755897611,-1176730.401082010706887 -556074.140725519158877,-1177026.734255324117839 -555855.418621406890452,-1176850.345461685210466 -555834.251966170268133,-1176871.512116921832785 -555855.418621406890452,-1176709.234426774084568 -556010.640759809175506,-1176688.067771537462249 -556095.307380755897611,-1176730.401082010706887</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></ogr:geometryProperty>
+      <ogr:areaClass>3</ogr:areaClass>
+      <ogr:classLabel>coniferous</ogr:classLabel>
+      <ogr:classColor>008000</ogr:classColor>
+      <ogr:useFeature>true</ogr:useFeature>
+      <ogr:areaNote>undefined</ogr:areaNote>
+    </ogr:features>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:features fid="F4">
+      <ogr:geometryProperty><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates>-557591.084350814227946,-1171332.903996660141274 -557816.86200667207595,-1171629.237169973552227 -557965.028593328781426,-1171756.2371013937518 -558014.417455547722057,-1171982.014757251599804 -557654.584316524327733,-1172186.625757872592658 -557485.251074630883522,-1172264.2368270738516 -557287.695625755353831,-1172200.736861363751814 -556984.3069006963633,-1172130.181343908188865 -556737.362589601776563,-1172158.403550890507177 -556673.862623891793191,-1172017.292515979381278 -556807.918107057339512,-1171812.681515358155593 -557132.473487353068776,-1171593.959411245770752 -557591.084350814227946,-1171332.903996660141274</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></ogr:geometryProperty>
+      <ogr:areaClass>4</ogr:areaClass>
+      <ogr:classLabel>fields</ogr:classLabel>
+      <ogr:classColor>993300</ogr:classColor>
+      <ogr:useFeature>true</ogr:useFeature>
+      <ogr:areaNote>undefined</ogr:areaNote>
+    </ogr:features>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:features fid="F5">
+      <ogr:geometryProperty><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates>-558536.528284719213843,-1174091.624729172326624 -558518.889405355323106,-1174133.958039645804092 -558448.333887899760157,-1174102.208056790754199 -558374.250594571465626,-1174070.458073935704306 -558360.13949108030647,-1173957.569246006663889 -558367.195042825886048,-1173939.930366642773151 -558406.000577426399104,-1174003.430332352872938 -558427.167232663137838,-1174045.763642826350406 -558536.528284719213843,-1174091.624729172326624</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></ogr:geometryProperty>
+      <ogr:areaClass>5</ogr:areaClass>
+      <ogr:classLabel>urban_areas</ogr:classLabel>
+      <ogr:classColor>FF0000</ogr:classColor>
+      <ogr:useFeature>true</ogr:useFeature>
+    </ogr:features>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:features fid="F6">
+      <ogr:geometryProperty><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates>-558596.500474556465633,-1174112.791384408948943 -558568.278267574263737,-1174165.708022500621155 -558610.611578047624789,-1174179.819125991780311 -558660.00044026656542,-1174133.958039645804092 -558638.833785029826686,-1174098.680280918022618 -558635.306009157095104,-1174098.680280918022618 -558596.500474556465633,-1174112.791384408948943</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></ogr:geometryProperty>
+      <ogr:areaClass>5</ogr:areaClass>
+      <ogr:classLabel>urban_areas</ogr:classLabel>
+      <ogr:classColor>FF0000</ogr:classColor>
+      <ogr:useFeature>true</ogr:useFeature>
+    </ogr:features>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:features fid="F7">
+      <ogr:geometryProperty><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates>-559037.472458653850481,-1174313.874609157443047 -558998.666924053337425,-1174373.846798994578421 -559044.528010399430059,-1174423.235661213519052 -559009.250251671648584,-1174458.513419941300526 -558973.97249294386711,-1174398.541230104165152 -558938.694734216085635,-1174363.263471376383677 -558914.00030310661532,-1174335.041264394065365 -558945.750285961665213,-1174317.402385030174628 -558981.028044689446688,-1174289.180178048089147 -559009.250251671648584,-1174271.541298684198409 -559037.472458653850481,-1174313.874609157443047</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></ogr:geometryProperty>
+      <ogr:areaClass>5</ogr:areaClass>
+      <ogr:classLabel>urban_areas</ogr:classLabel>
+      <ogr:classColor>FF0000</ogr:classColor>
+      <ogr:useFeature>true</ogr:useFeature>
+    </ogr:features>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:features fid="F8">
+      <ogr:geometryProperty><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates>-555668.446500149788335,-1169621.932698362739757 -556275.223950267769396,-1170094.654665315058082 -556063.557397900964133,-1170256.932355462806299 -556317.557260741130449,-1170609.709942740853876 -556134.112915356643498,-1170863.709805580787361 -555767.224224587553181,-1170920.154219545191154 -555315.668912871857174,-1170327.487872918369249 -555259.224498907453381,-1170228.710148480720818 -555075.78015352296643,-1170376.876735137309879 -554885.280256392899901,-1170101.710217060521245 -555231.002291925251484,-1169699.543767563765869 -555668.446500149788335,-1169621.932698362739757</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></ogr:geometryProperty>
+      <ogr:areaClass>4</ogr:areaClass>
+      <ogr:classLabel>fields</ogr:classLabel>
+      <ogr:classColor>993300</ogr:classColor>
+      <ogr:useFeature>true</ogr:useFeature>
+      <ogr:areaNote>undefined</ogr:areaNote>
+    </ogr:features>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:features fid="F9">
+      <ogr:geometryProperty><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates>-555026.391291304025799,-1171202.376289367675781 -554835.89139417395927,-1171401.695626179687679 -554855.294161474215798,-1171311.737341423751786 -554969.94687733950559,-1171167.098530639894307 -555026.391291304025799,-1171202.376289367675781</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></ogr:geometryProperty>
+      <ogr:areaClass>5</ogr:areaClass>
+      <ogr:classLabel>urban_areas</ogr:classLabel>
+      <ogr:classColor>FF0000</ogr:classColor>
+      <ogr:useFeature>true</ogr:useFeature>
+    </ogr:features>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:features fid="F10">
+      <ogr:geometryProperty><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates>-555225.710628116037697,-1171175.917970321839675 -555340.363343981327489,-1171242.945711904438213 -555328.016128426650539,-1171265.876255077542737 -555202.780084942933172,-1171191.792961749248207 -555225.710628116037697,-1171175.917970321839675</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></ogr:geometryProperty>
+      <ogr:areaClass>5</ogr:areaClass>
+      <ogr:classLabel>urban_areas</ogr:classLabel>
+      <ogr:classColor>FF0000</ogr:classColor>
+      <ogr:useFeature>true</ogr:useFeature>
+    </ogr:features>
+  </gml:featureMember>
+</ogr:FeatureCollection>
+ 
+                </wps:ComplexData>
+            </wps:Data>
+        </wps:Output>
+        <wps:Output>
+            <ows:Identifier>text</ows:Identifier>
+            <ows:Title>Output literal data</ows:Title>
+            <wps:Data>
+                <wps:LiteralData dataType="integer">1</wps:LiteralData>
+            </wps:Data>
+        </wps:Output>
+    </wps:ProcessOutputs>
+</wps:ExecuteResponse>

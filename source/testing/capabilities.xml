@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wps:Capabilities service="WPS" version="1.0.0" xml:lang="eng" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsGetCapabilities_response.xsd" updateSequence="1">
+	<ows:ServiceIdentification>
+		<ows:Title>PyWPS Server</ows:Title>
+		<ows:Abstract>See http://pywps.wald.intevation.org and http://www.opengeospatial.org/standards/wps</ows:Abstract>
+		<ows:Keywords>
+			<ows:Keyword>GRASS</ows:Keyword>
+			<ows:Keyword>GIS</ows:Keyword>
+			<ows:Keyword>WPS</ows:Keyword>
+		</ows:Keywords>
+		<ows:ServiceType>WPS</ows:ServiceType>
+		<ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion>
+		<ows:Fees>None</ows:Fees>
+		<ows:AccessConstraints>none</ows:AccessConstraints>
+	</ows:ServiceIdentification>
+	<ows:ServiceProvider>
+		<ows:ProviderName>Your Company Name</ows:ProviderName>
+		<ows:ProviderSite xlink:href="http://foo.bar"/>
+		<ows:ServiceContact>
+			<ows:IndividualName>Your Name</ows:IndividualName>
+			<ows:PositionName>Your Position</ows:PositionName>
+			<ows:ContactInfo>
+				<ows:Address>
+					<ows:DeliveryPoint>Street</ows:DeliveryPoint>
+					<ows:City>City</ows:City>
+					<ows:PostalCode>000 00</ows:PostalCode>
+					<ows:Country>eu</ows:Country>
+					<ows:ElectronicMailAddress>login@server.org</ows:ElectronicMailAddress>
+				</ows:Address>
+				<ows:OnlineResource xlink:href="http://foo.bar"/>
+				<ows:HoursOfService>0:00-24:00</ows:HoursOfService>
+				<ows:ContactInstructions>none</ows:ContactInstructions>
+			</ows:ContactInfo>
+			<ows:Role>Your role</ows:Role>
+		</ows:ServiceContact>
+	</ows:ServiceProvider>
+	<ows:OperationsMetadata>
+		<ows:Operation name="GetCapabilities">
+			<ows:DCP>
+				<ows:HTTP>
+					<ows:Get xlink:href="http://localhost/cgi-bin/wps?"/>
+					<ows:Post xlink:href="http://localhost/cgi-bin/wps"/>
+				</ows:HTTP>
+			</ows:DCP>
+		</ows:Operation>
+		<ows:Operation name="DescribeProcess">
+			<ows:DCP>
+				<ows:HTTP>
+					<ows:Get xlink:href="http://localhost/cgi-bin/wps?"/>
+					<ows:Post xlink:href="http://localhost/cgi-bin/wps"/>
+				</ows:HTTP>
+			</ows:DCP>
+		</ows:Operation>
+		<ows:Operation name="Execute">
+			<ows:DCP>
+				<ows:HTTP>
+					<ows:Get xlink:href="http://localhost/cgi-bin/wps?"/>
+					<ows:Post xlink:href="http://localhost/cgi-bin/wps"/>
+				</ows:HTTP>
+			</ows:DCP>
+		</ows:Operation>
+	</ows:OperationsMetadata>
+	<wps:ProcessOfferings>
+		<wps:Process wps:processVersion="1.0">
+			<ows:Identifier>returner</ows:Identifier>
+			<ows:Title>Return process</ows:Title>
+			<ows:Abstract>This is demonstration process of PyWPS, returns
+            the same file, it gets on input, as the output.</ows:Abstract>
+		</wps:Process>
+	</wps:ProcessOfferings>
+	<wps:Languages>
+		<wps:Default>
+			<ows:Language>eng</ows:Language>
+		</wps:Default>
+		<wps:Supported>
+			<ows:Language>eng</ows:Language>
+		</wps:Supported>
+	</wps:Languages>
+	<wps:WSDL xlink:href="http://localhost/cgi-bin/wps?WSDL"/>
+</wps:Capabilities>
