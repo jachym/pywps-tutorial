@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Writing custom WPS Process &mdash; PyWPS Course 3.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PyWPS Course 3.x documentation" href="../index.html" />
+    <link rel="next" title="Testing the PyWPS and first process" href="../testing/index.html" />
+    <link rel="prev" title="Configuration" href="../configuration/index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../testing/index.html" title="Testing the PyWPS and first process"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../configuration/index.html" title="Configuration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="writing-custom-wps-process">
+<h1>Writing custom WPS Process<a class="headerlink" href="#writing-custom-wps-process" title="Permalink to this headline">¶</a></h1>
+<p>PyWPS Processes is <a class="reference external" href="http://docs.python.org/tutorial/modules.html">Python module</a> or instance of the module.</p>
+<p>Processes are stored in special directory, <a class="reference external" href="http://docs.python.org/tutorial/modules.html#packages">Python Package</a>. This must contain <tt class="docutils literal"><span class="pre">__init__.py</span></tt> file containing list of available processes in <tt class="docutils literal"><span class="pre">__all__</span></tt> array.</p>
+<p>There are several possibilities, where to locate the directory (in general,
+it can be <em>anywhere</em> in the system), we will put it at the same level, as
+PyWPS installation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mkdir</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">processes</span>
+</pre></div>
+</div>
+<div class="section" id="process-structure">
+<h2>Process structure<a class="headerlink" href="#process-structure" title="Permalink to this headline">¶</a></h2>
+<p>Each process is python Class (or it&#8217;s instance) with <strong>at least two methods</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">__init__</span></tt> which initializes the process, where you will define
+inputs and outputs, and other stuff</li>
+<li><tt class="docutils literal"><span class="pre">execute</span></tt> which will be called, once PyWPS accepts Execute request
+type</li>
+</ul>
+</div></blockquote>
+<p>Start to edit file of name <tt class="docutils literal"><span class="pre">returner.py</span></tt> in the created processes
+directory:</p>
+<p>Let&#8217;s talk about it more deeply:</p>
+<div class="section" id="initialization">
+<h3>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h3>
+<p>The process is inherited from the <tt class="xref py py-class docutils literal"><span class="pre">pywps.Process.WPSProcess</span></tt> class.
+In Python, you must initialize this parent class at first place.</p>
+<p>In the initialization, you have to define</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>identifier</strong> Process identifier</li>
+<li><strong>title</strong>  Human-readable title</li>
+<li><strong>abstract</strong> Optionally longer text for process description</li>
+</ul>
+</div></blockquote>
+<p>Several other things can be defined:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>version</strong> process version</li>
+<li><strong>statusSupported</strong> indicates, whether the process supports
+asynchronous calls</li>
+<li><strong>storeSupported</strong> indicates, whether the process can deploy it&#8217;s
+result to the server for later usage</li>
+</ul>
+</div></blockquote>
+<p>And other parameters</p>
+<p>Then Inpus can be defined</p>
+<div class="section" id="process-inputs">
+<h4>Process Inputs<a class="headerlink" href="#process-inputs" title="Permalink to this headline">¶</a></h4>
+<p>In this case, we create and add ComplexData input and LiteralData input.
+Both do have long line of configuration options, but for now, we let the
+default ones.</p>
+<p>The <strong>LiteralData</strong> input will be of type <em>integer</em>. The <strong>ComplexData</strong>
+input will accept only XML-encoded files, ideally <a class="reference external" href="http://opengeospatial.org/standards/gml">GML</a>.</p>
+</div>
+<div class="section" id="process-outputs">
+<h4>Process Outputs<a class="headerlink" href="#process-outputs" title="Permalink to this headline">¶</a></h4>
+<p>As you can see, Outputs are defined in very similar way to the inputs.</p>
+<p>For more, see <a class="reference external" href="http://pywps.wald.intevation.org/documentation/pywps-3.2/api/Process/InAndOutputs.html">in- and output documentation</a></p>
+</div>
+</div>
+<div class="section" id="execute-method">
+<h3>Execute method<a class="headerlink" href="#execute-method" title="Permalink to this headline">¶</a></h3>
+<p>Here it comes: this is the actual working method. Here your data are
+analyzed, imported to GRASS, translated using GDAL, transformed using OGR,
+interpolated using R. Here it happens.</p>
+<p>In our case, the &#8220;analysis&#8221; is pretty simple.</p>
+<p>We used the <tt class="xref py py-meth docutils literal"><span class="pre">getValue()</span></tt> method of data inputs and <tt class="xref py py-meth docutils literal"><span class="pre">setValue()</span></tt>
+method of data outputs and just copied input values to output values.</p>
+<div class="section" id="reporting-some-error">
+<h4>Reporting some error<a class="headerlink" href="#reporting-some-error" title="Permalink to this headline">¶</a></h4>
+<p>If <tt class="xref py py-meth docutils literal"><span class="pre">execute()</span></tt> returns anything <strong>but</strong> null, it is considered as
+error and exception is called:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">return</span> <span class="s">&quot;Oups! Something went wrong&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="calling-command-line-utils">
+<h4>Calling command line utils<a class="headerlink" href="#calling-command-line-utils" title="Permalink to this headline">¶</a></h4>
+<p>In some case, you need to call command line utils. You can either use the
+<a class="reference external" href="http://docs.python.org/library/subprocess.html#module-subprocess" title="(in Python v2.7)"><tt class="xref py py-mod docutils literal"><span class="pre">subprocess</span></tt></a> module, or <tt class="xref py py-class docutils literal"><span class="pre">WPSProcess</span></tt> method
+<tt class="xref py py-meth docutils literal"><span class="pre">WPSProcess.cmd()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd</span><span class="p">([</span><span class="s">&quot;g.region&quot;</span><span class="p">,</span><span class="s">&quot;-g&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The command is accepted as <strong>array</strong> of parameters. Calling it as
+string, e.g. &#8220;g.region -g&#8221; would NOT work.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Better do not use such command line utils. It is much better to
+work with standard python interface of various programs.</p>
+</div>
+</div>
+<div class="section" id="logging-and-debugging">
+<h4>Logging and debugging<a class="headerlink" href="#logging-and-debugging" title="Permalink to this headline">¶</a></h4>
+<p>Do not use <a class="reference external" href="http://docs.python.org/library/functions.html#print" title="(in Python v2.7)"><tt class="xref py py-func docutils literal"><span class="pre">print()</span></tt></a> function. Use <tt class="docutils literal"><span class="pre">logging</span></tt> package instead:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Just information message&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Variable content: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">variable</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Error occured: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you set the file name in the configuration file, you should obtain the
+result there. Otherwise, you should be able to see something in the
+standard error file (e.g. <tt class="file docutils literal"><span class="pre">/var/log/apache2/error.log</span></tt>)</p>
+</div>
+</div>
+</div>
+<div class="section" id="registering-the-process-into-pywps-server">
+<h2>Registering the process into PyWPS server<a class="headerlink" href="#registering-the-process-into-pywps-server" title="Permalink to this headline">¶</a></h2>
+<p>Now, we should have following directory structure:</p>
+<div class="highlight-python"><div class="highlight"><pre>/usr/
+/usr/local/
+/usr/local/processes/
+/usr/local/processes/returner.py
+</pre></div>
+</div>
+<p>Since <tt class="file docutils literal"><span class="pre">processes</span></tt> are <em>python package</em>, <tt class="file docutils literal"><span class="pre">__init__.py</span></tt> file must
+be available. Every python module, which is part of the python package must
+be listed in the <tt class="docutils literal"><span class="pre">__all__</span></tt> array in the init file.</p>
+<p>Content of <tt class="file docutils literal"><span class="pre">/usr/local/process/__init__.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;returner&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Writing custom WPS Process</a><ul>
+<li><a class="reference internal" href="#process-structure">Process structure</a><ul>
+<li><a class="reference internal" href="#initialization">Initialization</a><ul>
+<li><a class="reference internal" href="#process-inputs">Process Inputs</a></li>
+<li><a class="reference internal" href="#process-outputs">Process Outputs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#execute-method">Execute method</a><ul>
+<li><a class="reference internal" href="#reporting-some-error">Reporting some error</a></li>
+<li><a class="reference internal" href="#calling-command-line-utils">Calling command line utils</a></li>
+<li><a class="reference internal" href="#logging-and-debugging">Logging and debugging</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#registering-the-process-into-pywps-server">Registering the process into PyWPS server</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../configuration/index.html"
+                        title="previous chapter">Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../testing/index.html"
+                        title="next chapter">Testing the PyWPS and first process</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/process/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../testing/index.html" title="Testing the PyWPS and first process"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../configuration/index.html" title="Configuration"
+             >previous</a> |</li>
+        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

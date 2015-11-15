@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>WPS OpenLayers Client &mdash; PyWPS Course 3.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PyWPS Course 3.x documentation" href="../index.html" />
+    <link rel="next" title="Conclusion" href="../conclusion/index.html" />
+    <link rel="prev" title="Deploying PyWPS on the server" href="../server/index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../conclusion/index.html" title="Conclusion"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../server/index.html" title="Deploying PyWPS on the server"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="wps-openlayers-client">
+<h1>WPS OpenLayers Client<a class="headerlink" href="#wps-openlayers-client" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://openlayers.org">OpenLayers</a> makes it easy to put a dynamic map in
+any web page. It can display map tiles and markers loaded from any source.
+MetaCarta developed the initial version of OpenLayers and gave it to the
+public to further the use of geographic information of all kinds.
+OpenLayers is completely free, Open Source JavaScript, released under a
+BSD-style License.</p>
+<p>OpenLayers was chosen as background library for necessary JavaScript
+programming, because it contains all the necessary stuff, like XML parsing,
+Ajax server proxy, GML parsing, etc.</p>
+<p>Several examples are available in the PyWPS webclient directory. Following
+code snipplets are taken from the <a class="reference external" href="../_static/wps.html">wps.html</a> file.
+<tt class="file docutils literal"><span class="pre">WPS.js</span></tt> is located <a class="reference external" href="../_static/WPS.js">in the same directory</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For better JavaScript debugging, consider to use <a class="reference external" href="http://getfirebug.com">Firebug</a> Firefox extension, which makes the life of
+JavaScript programmer really easier.</p>
+</div>
+<div class="section" id="the-map">
+<h2>The map<a class="headerlink" href="#the-map" title="Permalink to this headline">¶</a></h2>
+<p>Create the map, with WMS layer and vector layer. The vector layer can be
+edited</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre>        &lt;script src=&quot;http://openlayers.org/api/OpenLayers.js&quot;&gt;&lt;/script&gt;
+
+            function init(){
+                layer = new OpenLayers.Layer.WMS( &quot;OpenLayers WMS&quot;,
+                        &quot;http://labs.metacarta.com/wms/vmap0&quot;, {layers: &#39;basic&#39;} );
+    
+                vlayer = new OpenLayers.Layer.Vector(&quot;Editable&quot;);
+                map = new OpenLayers.Map( &#39;map&#39;, {
+                    controls: [
+                        new OpenLayers.Control.PanZoom(),
+                        new OpenLayers.Control.EditingToolbar(vlayer)
+                    ]
+                });
+                map.addLayers([layer, vlayer]);
+    
+                map.setCenter(new OpenLayers.LonLat(lon, lat), zoom);
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="setup-the-wps-client">
+<h2>Setup the WPS client<a class="headerlink" href="#setup-the-wps-client" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="file docutils literal"><span class="pre">WPS.js</span></tt> is part of PyWPS source, in the <tt class="file docutils literal"><span class="pre">webclient</span></tt>
+directory. You have to copy it to the HTML file and include it.</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></div></td><td class="code"><div class="highlight"><pre>        &lt;script src=&quot;WPS.js&quot;&gt;&lt;/script&gt;
+            var onWPSClicked = function() {
+
+                // create the WPS object
+                var wps = new OpenLayers.WPS(&quot;http://localhost/cgi-bin/wps&quot;,{onSucceeded: onWPSSussceeded});
+
+                // define data inputs
+                var dataInput = new OpenLayers.WPS.ComplexPut({
+                    identifier:&quot;data&quot;,
+                    value:  OpenLayers.Format.GML.prototype.write(vlayer.features)
+                    });
+                var literalInput = new OpenLayers.WPS.LiteralPut({
+                        identifier:&quot;text&quot;,
+                        value: document.getElementById(&quot;text&quot;).value
+                    });
+
+                // define data outputs
+                var literalOutput = new OpenLayers.WPS.LiteralPut({
+                            identifier: &quot;text&quot;
+                        });
+                var complexOutput = new OpenLayers.WPS.ComplexPut({
+                            identifier: &quot;output&quot;
+                        });
+
+                // define the process with in- and outputs
+                var returnerProcess = new OpenLayers.WPS.Process({
+                        identifier: &quot;returner&quot;,
+                        inputs: [dataInput,literalInput],
+                        outputs: [literalOutput, complexOutput] });
+
+                // register process to particular wps and execute
+                wps.addProcess(returnerProcess);
+                wps.execute(&quot;returner&quot;);
+            };
+</pre></div>
+</td></tr></table></div>
+<p>Once the process is calculated, <tt class="xref py py-func docutils literal"><span class="pre">onWPSSussceeded()</span></tt> is called.</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre>            <span class="kd">var</span> <span class="nx">onWPSSussceeded</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">process</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">getOutput</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">).</span><span class="nx">getValue</span><span class="p">();</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+            <span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+<p>Another way, how to obtain some informations from the server and build the
+client automatically is to run <tt class="docutils literal"><span class="pre">wps.getCapabilities</span></tt> and
+<tt class="docutils literal"><span class="pre">wps.describeProcess</span></tt> methods. All informations from the server are then
+stored on the client.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">WPS OpenLayers Client</a><ul>
+<li><a class="reference internal" href="#the-map">The map</a></li>
+<li><a class="reference internal" href="#setup-the-wps-client">Setup the WPS client</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../server/index.html"
+                        title="previous chapter">Deploying PyWPS on the server</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../conclusion/index.html"
+                        title="next chapter">Conclusion</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/client/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../conclusion/index.html" title="Conclusion"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../server/index.html" title="Deploying PyWPS on the server"
+             >previous</a> |</li>
+        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

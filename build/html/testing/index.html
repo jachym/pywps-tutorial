@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing the PyWPS and first process &mdash; PyWPS Course 3.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PyWPS Course 3.x documentation" href="../index.html" />
+    <link rel="next" title="Deploying PyWPS on the server" href="../server/index.html" />
+    <link rel="prev" title="Writing custom WPS Process" href="../process/index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../server/index.html" title="Deploying PyWPS on the server"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../process/index.html" title="Writing custom WPS Process"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testing-the-pywps-and-first-process">
+<h1>Testing the PyWPS and first process<a class="headerlink" href="#testing-the-pywps-and-first-process" title="Permalink to this headline">¶</a></h1>
+<p>The very first test can be done in the command line. Before we start,
+several environment variables have to be set:</p>
+<div class="highlight-python"><div class="highlight"><pre>export PYWPS_PROCESSES=/usr/local/processes/
+export PYWPS_CFG=/usr/local/processes/pywps.cfg
+</pre></div>
+</div>
+<div class="section" id="getcapabilities">
+<h2>GetCapabilities<a class="headerlink" href="#getcapabilities" title="Permalink to this headline">¶</a></h2>
+<p>Now we can run the wps.py binary from the command line:</p>
+<div class="highlight-python"><div class="highlight"><pre>/usr/local/pywps/wps.py &quot;service=wps&amp;request=getcapabilities&quot;
+</pre></div>
+</div>
+<p>You should obtain following text.</p>
+<div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;wps:Capabilities</span> <span class="na">service=</span><span class="s">&quot;WPS&quot;</span> <span class="na">version=</span><span class="s">&quot;1.0.0&quot;</span> <span class="na">xml:lang=</span><span class="s">&quot;eng&quot;</span> <span class="na">xmlns:xlink=</span><span class="s">&quot;http://www.w3.org/1999/xlink&quot;</span> <span class="na">xmlns:wps=</span><span class="s">&quot;http://www.opengis.net/wps/1.0.0&quot;</span> <span class="na">xmlns:ows=</span><span class="s">&quot;http://www.opengis.net/ows/1.1&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsGetCapabilities_response.xsd&quot;</span> <span class="na">updateSequence=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;ows:ServiceIdentification&gt;</span>
+		<span class="nt">&lt;ows:Title&gt;</span>PyWPS Server<span class="nt">&lt;/ows:Title&gt;</span>
+		<span class="nt">&lt;ows:Abstract&gt;</span>See http://pywps.wald.intevation.org and http://www.opengeospatial.org/standards/wps<span class="nt">&lt;/ows:Abstract&gt;</span>
+		<span class="nt">&lt;ows:Keywords&gt;</span>
+			<span class="nt">&lt;ows:Keyword&gt;</span>GRASS<span class="nt">&lt;/ows:Keyword&gt;</span>
+			<span class="nt">&lt;ows:Keyword&gt;</span>GIS<span class="nt">&lt;/ows:Keyword&gt;</span>
+	<span class="nt">&lt;wps:ProcessOfferings&gt;</span>
+		<span class="nt">&lt;wps:Process</span> <span class="na">wps:processVersion=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;ows:Identifier&gt;</span>returner<span class="nt">&lt;/ows:Identifier&gt;</span>
+			<span class="nt">&lt;ows:Title&gt;</span>Return process<span class="nt">&lt;/ows:Title&gt;</span>
+			<span class="nt">&lt;ows:Abstract&gt;</span>This is demonstration process of PyWPS, returns
+            the same file, it gets on input, as the output.<span class="nt">&lt;/ows:Abstract&gt;</span>
+		<span class="nt">&lt;/wps:Process&gt;</span>
+	<span class="nt">&lt;/wps:ProcessOfferings&gt;</span>
+<span class="nt">&lt;/wps:Capabilities&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>You see, that <tt class="docutils literal"><span class="pre">returner</span></tt> process is available</p>
+</div>
+<div class="section" id="describeprocess">
+<h2>DescribeProcess<a class="headerlink" href="#describeprocess" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>/usr/local/pywps/wps.py &quot;service=wps&amp;version=1.0.0&amp;request=describeprocess&amp;identifier=returner&quot;
+</pre></div>
+</div>
+<p>We now can see process inputs definition</p>
+<div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre>        <span class="nt">&lt;DataInputs&gt;</span>
+            <span class="nt">&lt;Input</span> <span class="na">minOccurs=</span><span class="s">&quot;1&quot;</span> <span class="na">maxOccurs=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;ows:Identifier&gt;</span>text<span class="nt">&lt;/ows:Identifier&gt;</span>
+                <span class="nt">&lt;ows:Title&gt;</span>Some width<span class="nt">&lt;/ows:Title&gt;</span>
+                <span class="nt">&lt;LiteralData&gt;</span>
+                    <span class="nt">&lt;ows:DataType</span> <span class="na">ows:reference=</span><span class="s">&quot;http://www.w3.org/TR/xmlschema-2/#integer&quot;</span><span class="nt">&gt;</span>integer<span class="nt">&lt;/ows:DataType&gt;</span>
+                    <span class="nt">&lt;ows:AnyValue</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;/LiteralData&gt;</span>
+            <span class="nt">&lt;/Input&gt;</span>
+            <span class="nt">&lt;Input</span> <span class="na">minOccurs=</span><span class="s">&quot;1&quot;</span> <span class="na">maxOccurs=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;ows:Identifier&gt;</span>data<span class="nt">&lt;/ows:Identifier&gt;</span>
+                <span class="nt">&lt;ows:Title&gt;</span>Input vector data<span class="nt">&lt;/ows:Title&gt;</span>
+                <span class="nt">&lt;ComplexData&gt;</span>
+                    <span class="nt">&lt;Default&gt;</span>
+                        <span class="nt">&lt;Format&gt;</span>
+                            <span class="nt">&lt;ows:MimeType&gt;</span>text/xml<span class="nt">&lt;/ows:MimeType&gt;</span>
+                        <span class="nt">&lt;/Format&gt;</span>
+                    <span class="nt">&lt;/Default&gt;</span>
+                    <span class="nt">&lt;Supported&gt;</span>
+                        <span class="nt">&lt;Format&gt;</span>
+                            <span class="nt">&lt;ows:MimeType&gt;</span>text/xml<span class="nt">&lt;/ows:MimeType&gt;</span>
+                        <span class="nt">&lt;/Format&gt;</span>
+                    <span class="nt">&lt;/Supported&gt;</span>
+                <span class="nt">&lt;/ComplexData&gt;</span>
+            <span class="nt">&lt;/Input&gt;</span>
+        <span class="nt">&lt;/DataInputs&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>as well as process outputs</p>
+<div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre>        <span class="nt">&lt;ProcessOutputs&gt;</span>
+            <span class="nt">&lt;Output&gt;</span>
+                <span class="nt">&lt;ows:Identifier&gt;</span>output<span class="nt">&lt;/ows:Identifier&gt;</span>
+                <span class="nt">&lt;ows:Title&gt;</span>Output vector data<span class="nt">&lt;/ows:Title&gt;</span>
+                <span class="nt">&lt;ComplexOutput&gt;</span>
+                    <span class="nt">&lt;Default&gt;</span>
+                        <span class="nt">&lt;Format&gt;</span>
+                            <span class="nt">&lt;ows:MimeType&gt;</span>text/xml<span class="nt">&lt;/ows:MimeType&gt;</span>
+                        <span class="nt">&lt;/Format&gt;</span>
+                    <span class="nt">&lt;/Default&gt;</span>
+                    <span class="nt">&lt;Supported&gt;</span>
+                        <span class="nt">&lt;Format&gt;</span>
+                            <span class="nt">&lt;ows:MimeType&gt;</span>text/xml<span class="nt">&lt;/ows:MimeType&gt;</span>
+                        <span class="nt">&lt;/Format&gt;</span>
+                    <span class="nt">&lt;/Supported&gt;</span>
+                <span class="nt">&lt;/ComplexOutput&gt;</span>
+            <span class="nt">&lt;/Output&gt;</span>
+            <span class="nt">&lt;Output&gt;</span>
+                <span class="nt">&lt;ows:Identifier&gt;</span>text<span class="nt">&lt;/ows:Identifier&gt;</span>
+                <span class="nt">&lt;ows:Title&gt;</span>Output literal data<span class="nt">&lt;/ows:Title&gt;</span>
+                <span class="nt">&lt;LiteralOutput&gt;</span>
+                    <span class="nt">&lt;ows:DataType</span> <span class="na">ows:reference=</span><span class="s">&quot;http://www.w3.org/TR/xmlschema-2/#integer&quot;</span><span class="nt">&gt;</span>integer<span class="nt">&lt;/ows:DataType&gt;</span>
+                <span class="nt">&lt;/LiteralOutput&gt;</span>
+            <span class="nt">&lt;/Output&gt;</span>
+        <span class="nt">&lt;/ProcessOutputs&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="execute">
+<h2>Execute<a class="headerlink" href="#execute" title="Permalink to this headline">¶</a></h2>
+<p>Finally, let the process be executed:</p>
+<div class="highlight-python"><div class="highlight"><pre>/usr/local/pywps/wps.py &quot;service=wps&amp;version=1.0.0&amp;request=execute&amp;identifier=returner&amp;datainputs=[text=1;data=http://apps.esdi-humboldt.cz/classification/traning_areas/training_areas_en.gml]&quot;
+</pre></div>
+</div>
+<p>First thing you see, is bunch of INFOs about current process status:</p>
+<div class="highlight-python"><div class="highlight"><pre>PyWPS INFO: Reading processes from [/home/jachym/usr/src/pywps/processes/course/]
+PyWPS INFO: Following processes are imported: [&#39;returner&#39;]
+PyWPS INFO: Status [processpaused]: Getting input text of process returner
+PyWPS INFO: Status [processpaused]: Getting input data of process returner
+PyWPS INFO: Status [processstarted][0.0]: Process returner started
+PyWPS INFO: Status [processsucceeded]: PyWPS Process returner successfully calculated
+</pre></div>
+</div>
+<p>And afterwards, the resulting XML will come</p>
+<div class="highlight-xml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="nt">&lt;wps:Process</span> <span class="na">wps:processVersion=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;ows:Identifier&gt;</span>returner<span class="nt">&lt;/ows:Identifier&gt;</span>
+        <span class="nt">&lt;ows:Title&gt;</span>Return process<span class="nt">&lt;/ows:Title&gt;</span>
+        <span class="nt">&lt;ows:Abstract&gt;</span>This is demonstration process of PyWPS, returns
+            the same file, it gets on input, as the output.<span class="nt">&lt;/ows:Abstract&gt;</span>
+    <span class="nt">&lt;/wps:Process&gt;</span>
+    <span class="nt">&lt;wps:Status</span> <span class="na">creationTime=</span><span class="s">&quot;Wed May  5 15:46:50 2010&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;wps:ProcessSucceeded&gt;</span>PyWPS Process returner successfully calculated<span class="nt">&lt;/wps:ProcessSucceeded&gt;</span>
+    <span class="nt">&lt;/wps:Status&gt;</span>
+    <span class="nt">&lt;wps:ProcessOutputs&gt;</span>
+        <span class="nt">&lt;wps:Output&gt;</span>
+            <span class="nt">&lt;ows:Identifier&gt;</span>text<span class="nt">&lt;/ows:Identifier&gt;</span>
+            <span class="nt">&lt;ows:Title&gt;</span>Output literal data<span class="nt">&lt;/ows:Title&gt;</span>
+            <span class="nt">&lt;wps:Data&gt;</span>
+                <span class="nt">&lt;wps:LiteralData</span> <span class="na">dataType=</span><span class="s">&quot;integer&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/wps:LiteralData&gt;</span>
+            <span class="nt">&lt;/wps:Data&gt;</span>
+        <span class="nt">&lt;/wps:Output&gt;</span>
+        <span class="nt">&lt;wps:Output&gt;</span>
+            <span class="nt">&lt;ows:Identifier&gt;</span>output<span class="nt">&lt;/ows:Identifier&gt;</span>
+            <span class="nt">&lt;ows:Title&gt;</span>Output vector data<span class="nt">&lt;/ows:Title&gt;</span>
+            <span class="nt">&lt;wps:Data&gt;</span>
+                <span class="nt">&lt;wps:ComplexData</span> <span class="na">mimeType=</span><span class="s">&quot;text/xml&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;ogr:FeatureCollection</span>
+     <span class="na">xmlns:ogr=</span><span class="s">&quot;http://ogr.maptools.org/&quot;</span>
+     <span class="na">xmlns:gml=</span><span class="s">&quot;http://www.opengis.net/gml&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;gml:boundedBy&gt;</span>
+    <span class="nt">&lt;gml:Box&gt;</span>
+      <span class="nt">&lt;gml:coord&gt;&lt;gml:X&gt;</span>-559044.5280103994<span class="nt">&lt;/gml:X&gt;&lt;gml:Y&gt;</span>-1177026.734255324<span class="nt">&lt;/gml:Y&gt;&lt;/gml:coord&gt;</span>
+      <span class="nt">&lt;gml:coord&gt;&lt;gml:X&gt;</span>-554835.891394174<span class="nt">&lt;/gml:X&gt;&lt;gml:Y&gt;</span>-1169621.932698363<span class="nt">&lt;/gml:Y&gt;&lt;/gml:coord&gt;</span>
+    <span class="nt">&lt;/gml:Box&gt;</span>
+  <span class="nt">&lt;/gml:boundedBy&gt;</span>                        
+  <span class="nt">&lt;gml:featureMember&gt;</span>
+    <span class="nt">&lt;ogr:features</span> <span class="na">fid=</span><span class="s">&quot;F0&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;ogr:geometryProperty&gt;&lt;gml:Polygon&gt;&lt;gml:outerBoundaryIs&gt;&lt;gml:LinearRing&gt;&lt;gml:coordinates&gt;</span>-555043.324615493183956,-1174010.838661683257669 -554930.435787564259954,-1174159.005248340079561 -555085.657925966545008,-1174293.060731505509466 -555276.157823096611537,-1174201.338558813324198 -555191.491202149889432,-1174088.449730884516612 -555043.324615493183956,-1174010.838661683257669<span class="nt">&lt;/gml:coordinates&gt;&lt;/gml:LinearRing&gt;&lt;/gml:outerBoundaryIs&gt;&lt;/gml:Polygon&gt;&lt;/ogr:geometryProperty&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="as-reference-output">
+<h3>As reference output<a class="headerlink" href="#as-reference-output" title="Permalink to this headline">¶</a></h3>
+<p>You can see, that the output XML  response contains the resulting GML. We
+can request the <strong>reference</strong> to it, put this at the end of previous request
+string:</p>
+<div class="highlight-python"><div class="highlight"><pre>&amp;responseform=responsedocument=[output=@asreference=true]
+</pre></div>
+</div>
+<p>And you get</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;wps:Output&gt;</span>
+    <span class="nt">&lt;ows:Identifier&gt;</span>output<span class="nt">&lt;/ows:Identifier&gt;</span>
+    <span class="nt">&lt;ows:Title&gt;</span>Output vector data<span class="nt">&lt;/ows:Title&gt;</span>
+    <span class="nt">&lt;wps:Reference</span> <span class="na">xlink:href=</span><span class="s">&quot;http://localhost/wps/wpsoutputs/output-9115&quot;</span> <span class="na">mimeType=</span><span class="s">&quot;text/xml&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/wps:Output&gt;</span>
+</pre></div>
+</div>
+<p>You can also configure PyWPS, so the output reference URL is <a class="reference external" href="http://opengeospatial.org/standards/wfs">OGC WFS</a> or <a class="reference external" href="http://opengeospatial.org/standards/wcs">OGC WCS</a>, if you <a class="reference external" href="http://pywps.wald.intevation.org/documentation/pywps-3.2/special/mapserver.html">use mapscript in your
+process</a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Testing the PyWPS and first process</a><ul>
+<li><a class="reference internal" href="#getcapabilities">GetCapabilities</a></li>
+<li><a class="reference internal" href="#describeprocess">DescribeProcess</a></li>
+<li><a class="reference internal" href="#execute">Execute</a><ul>
+<li><a class="reference internal" href="#as-reference-output">As reference output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../process/index.html"
+                        title="previous chapter">Writing custom WPS Process</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../server/index.html"
+                        title="next chapter">Deploying PyWPS on the server</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/testing/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../server/index.html" title="Deploying PyWPS on the server"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../process/index.html" title="Writing custom WPS Process"
+             >previous</a> |</li>
+        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

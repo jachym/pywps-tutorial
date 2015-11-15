@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>OGC Web Processing Service &mdash; PyWPS Course 3.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PyWPS Course 3.x documentation" href="../index.html" />
+    <link rel="next" title="Installation" href="../installation/index.html" />
+    <link rel="prev" title="Introduction" href="../introduction/index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../installation/index.html" title="Installation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../introduction/index.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ogc-web-processing-service">
+<h1>OGC Web Processing Service<a class="headerlink" href="#ogc-web-processing-service" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This section should be usable for <em>any</em> WPS implementation and
+should give you general picture about the OGC WPS standard.</p>
+</div>
+<dl class="docutils">
+<dt><a class="reference external" href="http://opengeospatial.org">Open Geospatial Consortium</a></dt>
+<dd>is a non-profit, international, voluntary consensus <strong>standards
+organization</strong> that is leading the development of standards for
+<strong>geospatial</strong> and location based services.</dd>
+</dl>
+<p>In short: it defines standards for geo-people, to communicate in the
+Internet environment.</p>
+<p>One of the standards, defined by OGC is <a class="reference external" href="http://opengeospatial.org/standards/wps">Web Processing Service</a>:</p>
+<blockquote>
+<div>... provides rules for standardizing <strong>how inputs and outputs</strong>
+(requests and responses) <strong>for geospatial processing services</strong>, such
+as polygon overlay. The standard also defines <strong>how a client can
+request the execution of a process, and how the output from the process
+is handled</strong>.  It defines an <strong>interface that facilitates the
+publishing of geospatial processes and clients’ discovery of and
+binding to those processes</strong>. The data required by the WPS can be
+delivered across a network or they can be available at the server.</div></blockquote>
+<p>Again in short: the standard describes, how to execute some geospatial
+analysis deployed on the server and obtain the result back.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Before you start to deal with PyWPS, consider to have a look at
+the standard - you can <a class="reference external" href="http://portal.opengeospatial.org/files/?artifact_id=32766">download it for free</a>.</p>
+</div>
+<div class="section" id="invoking-wps-server">
+<span id="index-1"></span><h2>Invoking WPS server<a class="headerlink" href="#invoking-wps-server" title="Permalink to this headline">¶</a></h2>
+<p>You can invoke WPS server in two ways: using HTTP GET method with
+key-value-pairs encoded request,  or HTTP POST method, using XML format of
+the request. They are both described well in the standard.</p>
+<div class="section" id="kvp-request-encoding">
+<h3>KVP request encoding<a class="headerlink" href="#kvp-request-encoding" title="Permalink to this headline">¶</a></h3>
+<p>In general, parameters are formated in the form:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">...&amp;</span><span class="n">key1</span><span class="o">=</span><span class="n">value1</span><span class="o">&amp;</span><span class="n">key2</span><span class="o">=</span><span class="n">value2</span><span class="o">&amp;...</span>
+</pre></div>
+</div>
+<p>They are written usually behind <tt class="docutils literal"><span class="pre">?</span></tt> sign of the server address. For
+example, invoking GetCapabilites operation, see <a class="reference internal" href="#my-getcapabilities-label"><em>GetCapabilities</em></a></p>
+<blockquote>
+<div><a class="reference external" href="http://foo/bar/wps?service=WPS&amp;request=GetCapabilities">http://foo/bar/wps?service=WPS&amp;request=GetCapabilities</a></div></blockquote>
+<p>Let&#8217;s look at this URL more detaily:</p>
+<dl class="docutils">
+<dt><em>http://</em></dt>
+<dd>It is the protocol of the request. We are using Hyper Text Transfer
+Protocol</dd>
+<dt><em>foo</em></dt>
+<dd>The WPS server address, where you will install it. This is usually
+something like google.com, microsoft.com, gnu.org or similar. At the
+beginning, it will be mostly <em>localhost</em>, which means, that it will be
+your computer.</dd>
+<dt><em>/bar/wps</em></dt>
+<dd>Path name of the installed PyWPS server.</dd>
+<dt><em>?</em></dt>
+<dd>The <tt class="docutils literal"><span class="pre">?</span></tt> sign indicates, that the request parameters will start</dd>
+<dt><em>service=WPS&amp;request=GetCapabilities</em></dt>
+<dd><p class="first">The KVP-encoded  request. We send two request parameters to the server:</p>
+<ul class="last simple">
+<li>service - which we set to <em>WPS</em></li>
+<li>request - which is set to <em>GetCapabilities</em></li>
+</ul>
+</dd>
+</dl>
+<p>The parameter names should be case insensitive, means, that <tt class="docutils literal"><span class="pre">SERVICE</span></tt> is the
+same as <tt class="docutils literal"><span class="pre">service</span></tt> and the same as <tt class="docutils literal"><span class="pre">SeRvIcE</span></tt>. The parameter values
+should be mostly case insensitive as well, means <tt class="docutils literal"><span class="pre">GETCAPABILITIES</span></tt> should
+be the same as <tt class="docutils literal"><span class="pre">getcapabilities</span></tt> and <tt class="docutils literal"><span class="pre">GetCapabilities</span></tt>.</p>
+</div>
+<div class="section" id="xml-request-encoding">
+<h3>XML request encoding<a class="headerlink" href="#xml-request-encoding" title="Permalink to this headline">¶</a></h3>
+<p>In this case, the request is encoded in XML form and send to the server
+<em>directly</em> via HTTP POST (the WPS server will read the file from standard input
+directly).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since XMLs are maybe too complicated, we will be using KVP
+encoding in this tutorial. Only one XML-encoded request type example
+will be showed. There are examples in the test directory of PYWPS as
+well as in the WPS Standard document.</p>
+</div>
+<p>GetCapabilities request in XML form would look like:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;ows:GetCapabilities</span> <span class="na">xmlns:ows=</span><span class="s">&quot;http://www.opengis.net/ows/1.1&quot;</span> <span class="na">xmlns:wps=</span><span class="s">&quot;http://www.opengis.net/wps/1.0.0&quot;</span> <span class="na">xmlns:xlink=</span><span class="s">&quot;http://www.w3.org/1999/xlink&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/ows/1.1 ..\wpsGetCapabilities_request.xsd&quot;</span> <span class="na">language=</span><span class="s">&quot;en&quot;</span> <span class="na">service=</span><span class="s">&quot;WPS&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;ows:AcceptVersions&gt;</span>
+                <span class="nt">&lt;ows:Version&gt;</span>1.0.0<span class="nt">&lt;/ows:Version&gt;</span>
+        <span class="nt">&lt;/ows:AcceptVersions&gt;</span>
+<span class="nt">&lt;/ows:GetCapabilities&gt;</span>
+</pre></div>
+</div>
+<p>Other requests can be much more complicated.</p>
+</div>
+</div>
+<div class="section" id="wps-request-types">
+<h2>WPS Request types<a class="headerlink" href="#wps-request-types" title="Permalink to this headline">¶</a></h2>
+<p>Similar to other OGC Web Services (such as WMS, WFS or WCS), WPS has three basic
+request types. Namely <strong>GetCapabilities, DescribeProcess</strong> and <strong>Execute</strong>.</p>
+<div class="section" id="getcapabilities">
+<span id="my-getcapabilities-label"></span><h3>GetCapabilities<a class="headerlink" href="#getcapabilities" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://apps.esdi-humboldt.cz/pywps/?service=WPS&amp;request=GetCapabilities">http://apps.esdi-humboldt.cz/pywps/?service=WPS&amp;request=GetCapabilities</a></p>
+<p>Mandatory parameters:</p>
+<blockquote>
+<div>service
+request</div></blockquote>
+<p>The server returns basic <cite>Capabilities</cite> document. Among others it contains:</p>
+<dl class="docutils">
+<dt><strong>ServiceIdentification</strong></dt>
+<dd><ul class="first last simple">
+<li>Title</li>
+<li>Abstract</li>
+<li>Keywords</li>
+<li>Service provider (Name, Organization, Address, ...)</li>
+</ul>
+</dd>
+</dl>
+<p><strong>OperationsMetadata</strong> - URLs to particular operations (GetCapabilities, DescribeProcess and Execute)</p>
+<p><strong>ProcessOfferings</strong> - List of available processes</p>
+</div>
+<div class="section" id="describeprocess">
+<h3>DescribeProcess<a class="headerlink" href="#describeprocess" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://apps.esdi-humboldt.cz/pywps/?service=WPS&amp;version=1.0.0&amp;request=DescribeProcess&amp;identifier=all">http://apps.esdi-humboldt.cz/pywps/?service=WPS&amp;version=1.0.0&amp;request=DescribeProcess&amp;identifier=all</a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>New <em>mandatory</em> parameters appeared in the request URL:</p>
+<ul class="last simple">
+<li>WPS version number</li>
+<li>Process identifier - it can be process identifier as stated in the
+Capabilites document or key word &#8216;all&#8217; for all process descriptions</li>
+</ul>
+</div>
+<p>The <em>ProcessDescriptions</em> document contains detailed description of selected
+processes. Each process is identified by</p>
+<blockquote>
+<div><ul class="simple">
+<li>Title</li>
+<li>Identifier</li>
+<li>Abstract (optional)</li>
+<li>DataInputs</li>
+<li>DataOutputs</li>
+</ul>
+</div></blockquote>
+<p>Now the client can be configured in order to be able to Execute the
+process.</p>
+</div>
+<div class="section" id="execute">
+<h3>Execute<a class="headerlink" href="#execute" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://apps.esdi-humboldt.cz/pywps/?service=WPS&amp;version=1.0.0&amp;request=Execute&amp;identifier=literalprocess&amp;datainputs=[int=1;float=3.2;zeroset=0;string=spam]&amp;storeExecuteResponse=false">http://apps.esdi-humboldt.cz/pywps/?service=WPS&amp;version=1.0.0&amp;request=Execute&amp;identifier=literalprocess&amp;datainputs=[int=1;float=3.2;zeroset=0;string=spam]&amp;storeExecuteResponse=false</a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">No new <em>mandatory</em> parameters appeared in the request URL,
+however, several optional did, among others <strong>DataInputs</strong>, but we will
+discuss some of them later.</p>
+</div>
+<p>Most important parameter, <strong>DataInputs</strong> is encoded as again as
+key-value-pairs, separated with <tt class="docutils literal"><span class="pre">;</span></tt> sign.</p>
+</div>
+</div>
+<div class="section" id="wps-in-and-outputs">
+<h2>WPS In- and Outputs<a class="headerlink" href="#wps-in-and-outputs" title="Permalink to this headline">¶</a></h2>
+<p>Three types of inputs and outputs are defined in the OGC standard.
+LiteralData, ComplexData and BoundingBox data.</p>
+<div class="section" id="literaldata">
+<h3>LiteralData<a class="headerlink" href="#literaldata" title="Permalink to this headline">¶</a></h3>
+<p>LiteralData can be any character string of special type, as described in <a class="reference external" href="http://www.w3.org/TR/xmlschema-2/">http://www.w3.org/TR/xmlschema-2/</a></p>
+<dl class="docutils">
+<dt>In PyWPS, there is currently support for</dt>
+<dd><ul class="first last simple">
+<li>String</li>
+<li>Float</li>
+<li>Integer</li>
+<li>Boolean</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="complexdata">
+<h3>ComplexData<a class="headerlink" href="#complexdata" title="Permalink to this headline">¶</a></h3>
+<p>This data type is used for pasting <em>complex</em> - Vector- Raster- or other
+data to the server or obtain it as result of the process. There are two
+ways, how this complex data are handled,</p>
+<blockquote>
+<div><ul class="simple">
+<li>Either you send them <strong>directly</strong> as part of the request to the server
+or you obtain them as part of the XML response from the server. This
+is mostly done by vector data, using GML or other text-based format.
+For raster data, they can be encoded using <a class="reference external" href="http://en.wikipedia.org/wiki/Base64">base64 encoding</a></li>
+<li>Or you send or obtain just <strong>reference</strong> to the data &#8211; URL to the file
+or service, where the data can be downloaded.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="boundingboxdata">
+<h3>BoundingBoxData<a class="headerlink" href="#boundingboxdata" title="Permalink to this headline">¶</a></h3>
+<p>If you need to define or obtain some kind of bounding box (2 or more
+dimensional), you can use this type of data.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>~<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Now you should be able to understand, what WPS is about, which are the in-
+and outputs, get some image <em>how</em> to call each request type and <em>what</em> you
+can expect as result. Let&#8217;s continue with PyWPS.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OGC Web Processing Service</a><ul>
+<li><a class="reference internal" href="#invoking-wps-server">Invoking WPS server</a><ul>
+<li><a class="reference internal" href="#kvp-request-encoding">KVP request encoding</a></li>
+<li><a class="reference internal" href="#xml-request-encoding">XML request encoding</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#wps-request-types">WPS Request types</a><ul>
+<li><a class="reference internal" href="#getcapabilities">GetCapabilities</a></li>
+<li><a class="reference internal" href="#describeprocess">DescribeProcess</a></li>
+<li><a class="reference internal" href="#execute">Execute</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#wps-in-and-outputs">WPS In- and Outputs</a><ul>
+<li><a class="reference internal" href="#literaldata">LiteralData</a></li>
+<li><a class="reference internal" href="#complexdata">ComplexData</a></li>
+<li><a class="reference internal" href="#boundingboxdata">BoundingBoxData</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">~</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../introduction/index.html"
+                        title="previous chapter">Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../installation/index.html"
+                        title="next chapter">Installation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/ogc-wps/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../installation/index.html" title="Installation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../introduction/index.html" title="Introduction"
+             >previous</a> |</li>
+        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
