@@ -6,5 +6,5 @@ custom processes.
 
 Where to continue
 =================
-Consider to have a look at `actual PyWPS documentation <http://pywps.wald.intevation.org/documentation/index.html>`_
+Consider to have a look at `actual PyWPS documentation <http://pywps.org/docs/>`_
 
