@@ -6,9 +6,9 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Deploying PyWPS on the server &mdash; PyWPS Course 3.x documentation</title>
+    <title>Deploying PyWPS on the server &#8212; PyWPS Course 3.x documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,12 +23,14 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="PyWPS Course 3.x documentation" href="../index.html" />
     <link rel="next" title="WPS OpenLayers Client" href="../client/index.html" />
     <link rel="prev" title="Testing the PyWPS and first process" href="../testing/index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -40,29 +42,29 @@
         <li class="right" >
           <a href="../testing/index.html" title="Testing the PyWPS and first process"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PyWPS Course 3.x documentation</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="deploying-pywps-on-the-server">
 <h1>Deploying PyWPS on the server<a class="headerlink" href="#deploying-pywps-on-the-server" title="Permalink to this headline">¶</a></h1>
 <p>PyWPS can run as <a href="#id1"><span class="problematic" id="id2">`CGI application &lt;&gt;`_</span></a>, in <a href="#id3"><span class="problematic" id="id4">`mod_python environment &lt;&gt;`_</span></a> or as <a href="#id5"><span class="problematic" id="id6">`java
 servlet &lt;&gt;`_</span></a> (with one limitation). There are examples how to do this in
-<tt class="file docutils literal"><span class="pre">webservices</span></tt> directory of the source code.</p>
+<code class="file docutils literal"><span class="pre">webservices</span></code> directory of the source code.</p>
 <p>Here we will use the CGI approach, because it is the easiest one.</p>
-<p>In the server <tt class="file docutils literal"><span class="pre">cgi-bin</span></tt> directory (/usr/lib/cgi-bin) create file,
-called <tt class="file docutils literal"><span class="pre">wps</span></tt> with following content:</p>
-<div class="highlight-python"><div class="highlight"><pre>#!/bin/sh
+<p>In the server <code class="file docutils literal"><span class="pre">cgi-bin</span></code> directory (/usr/lib/cgi-bin) create file,
+called <code class="file docutils literal"><span class="pre">wps</span></code> with following content:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
 
-export PYWPS_CFG=/usr/local/pywps/process/pywps.cfg
-export PYWPS_PROCESSES=/usr/local/pywps/processes
+<span class="n">export</span> <span class="n">PYWPS_CFG</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">pywps</span><span class="o">/</span><span class="n">process</span><span class="o">/</span><span class="n">pywps</span><span class="o">.</span><span class="n">cfg</span>
+<span class="n">export</span> <span class="n">PYWPS_PROCESSES</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">pywps</span><span class="o">/</span><span class="n">processes</span>
 
-/usr/local/pywps/wps.py
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">pywps</span><span class="o">/</span><span class="n">wps</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <p>Now you should be able to point the browser to following address
@@ -75,7 +77,7 @@ set of processes on one web server.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="../testing/index.html"
@@ -83,29 +85,28 @@ set of processes on one web server.</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../client/index.html"
                         title="next chapter">WPS OpenLayers Client</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/server/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/server/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -117,12 +118,12 @@ set of processes on one web server.</p>
         <li class="right" >
           <a href="../testing/index.html" title="Testing the PyWPS and first process"
              >previous</a> |</li>
-        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PyWPS Course 3.x documentation</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
 </html>

@@ -6,9 +6,9 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>OGC Web Processing Service &mdash; PyWPS Course 3.x documentation</title>
+    <title>OGC Web Processing Service &#8212; PyWPS Course 3.x documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,12 +23,14 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="PyWPS Course 3.x documentation" href="../index.html" />
     <link rel="next" title="Installation" href="../installation/index.html" />
     <link rel="prev" title="Introduction" href="../introduction/index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -40,14 +42,14 @@
         <li class="right" >
           <a href="../introduction/index.html" title="Introduction"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PyWPS Course 3.x documentation</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="ogc-web-processing-service">
 <h1>OGC Web Processing Service<a class="headerlink" href="#ogc-web-processing-service" title="Permalink to this headline">¶</a></h1>
@@ -89,11 +91,11 @@ the request. They are both described well in the standard.</p>
 <div class="section" id="kvp-request-encoding">
 <h3>KVP request encoding<a class="headerlink" href="#kvp-request-encoding" title="Permalink to this headline">¶</a></h3>
 <p>In general, parameters are formated in the form:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="o">...&amp;</span><span class="n">key1</span><span class="o">=</span><span class="n">value1</span><span class="o">&amp;</span><span class="n">key2</span><span class="o">=</span><span class="n">value2</span><span class="o">&amp;...</span>
+<div class="highlight-default"><div class="highlight"><pre><span class="o">...&amp;</span><span class="n">key1</span><span class="o">=</span><span class="n">value1</span><span class="o">&amp;</span><span class="n">key2</span><span class="o">=</span><span class="n">value2</span><span class="o">&amp;...</span>
 </pre></div>
 </div>
-<p>They are written usually behind <tt class="docutils literal"><span class="pre">?</span></tt> sign of the server address. For
-example, invoking GetCapabilites operation, see <a class="reference internal" href="#my-getcapabilities-label"><em>GetCapabilities</em></a></p>
+<p>They are written usually behind <code class="docutils literal"><span class="pre">?</span></code> sign of the server address. For
+example, invoking GetCapabilites operation, see <a class="reference internal" href="#my-getcapabilities-label"><span class="std std-ref">GetCapabilities</span></a></p>
 <blockquote>
 <div><a class="reference external" href="http://foo/bar/wps?service=WPS&amp;request=GetCapabilities">http://foo/bar/wps?service=WPS&amp;request=GetCapabilities</a></div></blockquote>
 <p>Let&#8217;s look at this URL more detaily:</p>
@@ -109,7 +111,7 @@ your computer.</dd>
 <dt><em>/bar/wps</em></dt>
 <dd>Path name of the installed PyWPS server.</dd>
 <dt><em>?</em></dt>
-<dd>The <tt class="docutils literal"><span class="pre">?</span></tt> sign indicates, that the request parameters will start</dd>
+<dd>The <code class="docutils literal"><span class="pre">?</span></code> sign indicates, that the request parameters will start</dd>
 <dt><em>service=WPS&amp;request=GetCapabilities</em></dt>
 <dd><p class="first">The KVP-encoded  request. We send two request parameters to the server:</p>
 <ul class="last simple">
@@ -118,10 +120,10 @@ your computer.</dd>
 </ul>
 </dd>
 </dl>
-<p>The parameter names should be case insensitive, means, that <tt class="docutils literal"><span class="pre">SERVICE</span></tt> is the
-same as <tt class="docutils literal"><span class="pre">service</span></tt> and the same as <tt class="docutils literal"><span class="pre">SeRvIcE</span></tt>. The parameter values
-should be mostly case insensitive as well, means <tt class="docutils literal"><span class="pre">GETCAPABILITIES</span></tt> should
-be the same as <tt class="docutils literal"><span class="pre">getcapabilities</span></tt> and <tt class="docutils literal"><span class="pre">GetCapabilities</span></tt>.</p>
+<p>The parameter names should be case insensitive, means, that <code class="docutils literal"><span class="pre">SERVICE</span></code> is the
+same as <code class="docutils literal"><span class="pre">service</span></code> and the same as <code class="docutils literal"><span class="pre">SeRvIcE</span></code>. The parameter values
+should be mostly case insensitive as well, means <code class="docutils literal"><span class="pre">GETCAPABILITIES</span></code> should
+be the same as <code class="docutils literal"><span class="pre">getcapabilities</span></code> and <code class="docutils literal"><span class="pre">GetCapabilities</span></code>.</p>
 </div>
 <div class="section" id="xml-request-encoding">
 <h3>XML request encoding<a class="headerlink" href="#xml-request-encoding" title="Permalink to this headline">¶</a></h3>
@@ -208,7 +210,7 @@ however, several optional did, among others <strong>DataInputs</strong>, but we 
 discuss some of them later.</p>
 </div>
 <p>Most important parameter, <strong>DataInputs</strong> is encoded as again as
-key-value-pairs, separated with <tt class="docutils literal"><span class="pre">;</span></tt> sign.</p>
+key-value-pairs, separated with <code class="docutils literal"><span class="pre">;</span></code> sign.</p>
 </div>
 </div>
 <div class="section" id="wps-in-and-outputs">
@@ -263,7 +265,7 @@ can expect as result. Let&#8217;s continue with PyWPS.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -296,29 +298,28 @@ can expect as result. Let&#8217;s continue with PyWPS.</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../installation/index.html"
                         title="next chapter">Installation</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/ogc-wps/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/ogc-wps/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -330,12 +331,12 @@ can expect as result. Let&#8217;s continue with PyWPS.</p>
         <li class="right" >
           <a href="../introduction/index.html" title="Introduction"
              >previous</a> |</li>
-        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PyWPS Course 3.x documentation</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
 </html>

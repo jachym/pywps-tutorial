@@ -6,9 +6,9 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>WPS OpenLayers Client &mdash; PyWPS Course 3.x documentation</title>
+    <title>WPS OpenLayers Client &#8212; PyWPS Course 3.x documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,12 +23,14 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="PyWPS Course 3.x documentation" href="../index.html" />
     <link rel="next" title="Conclusion" href="../conclusion/index.html" />
     <link rel="prev" title="Deploying PyWPS on the server" href="../server/index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -40,14 +42,14 @@
         <li class="right" >
           <a href="../server/index.html" title="Deploying PyWPS on the server"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PyWPS Course 3.x documentation</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="wps-openlayers-client">
 <h1>WPS OpenLayers Client<a class="headerlink" href="#wps-openlayers-client" title="Permalink to this headline">¶</a></h1>
@@ -62,7 +64,7 @@ programming, because it contains all the necessary stuff, like XML parsing,
 Ajax server proxy, GML parsing, etc.</p>
 <p>Several examples are available in the PyWPS webclient directory. Following
 code snipplets are taken from the <a class="reference external" href="../_static/wps.html">wps.html</a> file.
-<tt class="file docutils literal"><span class="pre">WPS.js</span></tt> is located <a class="reference external" href="../_static/WPS.js">in the same directory</a>.</p>
+<code class="file docutils literal"><span class="pre">WPS.js</span></code> is located <a class="reference external" href="../_static/WPS.js">in the same directory</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For better JavaScript debugging, consider to use <a class="reference external" href="http://getfirebug.com">Firebug</a> Firefox extension, which makes the life of
@@ -108,7 +110,7 @@ edited</p>
 </div>
 <div class="section" id="setup-the-wps-client">
 <h2>Setup the WPS client<a class="headerlink" href="#setup-the-wps-client" title="Permalink to this headline">¶</a></h2>
-<p>The <tt class="file docutils literal"><span class="pre">WPS.js</span></tt> is part of PyWPS source, in the <tt class="file docutils literal"><span class="pre">webclient</span></tt>
+<p>The <code class="file docutils literal"><span class="pre">WPS.js</span></code> is part of PyWPS source, in the <code class="file docutils literal"><span class="pre">webclient</span></code>
 directory. You have to copy it to the HTML file and include it.</p>
 <div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -179,7 +181,7 @@ directory. You have to copy it to the HTML file and include it.</p>
             };
 </pre></div>
 </td></tr></table></div>
-<p>Once the process is calculated, <tt class="xref py py-func docutils literal"><span class="pre">onWPSSussceeded()</span></tt> is called.</p>
+<p>Once the process is calculated, <code class="xref py py-func docutils literal"><span class="pre">onWPSSussceeded()</span></code> is called.</p>
 <div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -190,8 +192,8 @@ directory. You have to copy it to the HTML file and include it.</p>
 </pre></div>
 </td></tr></table></div>
 <p>Another way, how to obtain some informations from the server and build the
-client automatically is to run <tt class="docutils literal"><span class="pre">wps.getCapabilities</span></tt> and
-<tt class="docutils literal"><span class="pre">wps.describeProcess</span></tt> methods. All informations from the server are then
+client automatically is to run <code class="docutils literal"><span class="pre">wps.getCapabilities</span></code> and
+<code class="docutils literal"><span class="pre">wps.describeProcess</span></code> methods. All informations from the server are then
 stored on the client.</p>
 </div>
 </div>
@@ -200,7 +202,7 @@ stored on the client.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -217,29 +219,28 @@ stored on the client.</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../conclusion/index.html"
                         title="next chapter">Conclusion</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/client/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/client/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -251,12 +252,12 @@ stored on the client.</p>
         <li class="right" >
           <a href="../server/index.html" title="Deploying PyWPS on the server"
              >previous</a> |</li>
-        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PyWPS Course 3.x documentation</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
 </html>

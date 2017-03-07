@@ -6,9 +6,9 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Writing custom WPS Process &mdash; PyWPS Course 3.x documentation</title>
+    <title>Writing custom WPS Process &#8212; PyWPS Course 3.x documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,12 +23,14 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="PyWPS Course 3.x documentation" href="../index.html" />
     <link rel="next" title="Testing the PyWPS and first process" href="../testing/index.html" />
     <link rel="prev" title="Configuration" href="../configuration/index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -40,23 +42,23 @@
         <li class="right" >
           <a href="../configuration/index.html" title="Configuration"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PyWPS Course 3.x documentation</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="writing-custom-wps-process">
 <h1>Writing custom WPS Process<a class="headerlink" href="#writing-custom-wps-process" title="Permalink to this headline">¶</a></h1>
 <p>PyWPS Processes is <a class="reference external" href="http://docs.python.org/tutorial/modules.html">Python module</a> or instance of the module.</p>
-<p>Processes are stored in special directory, <a class="reference external" href="http://docs.python.org/tutorial/modules.html#packages">Python Package</a>. This must contain <tt class="docutils literal"><span class="pre">__init__.py</span></tt> file containing list of available processes in <tt class="docutils literal"><span class="pre">__all__</span></tt> array.</p>
+<p>Processes are stored in special directory, <a class="reference external" href="http://docs.python.org/tutorial/modules.html#packages">Python Package</a>. This must contain <code class="docutils literal"><span class="pre">__init__.py</span></code> file containing list of available processes in <code class="docutils literal"><span class="pre">__all__</span></code> array.</p>
 <p>There are several possibilities, where to locate the directory (in general,
 it can be <em>anywhere</em> in the system), we will put it at the same level, as
 PyWPS installation:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">mkdir</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">processes</span>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">mkdir</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">processes</span>
 </pre></div>
 </div>
 <div class="section" id="process-structure">
@@ -64,18 +66,18 @@ PyWPS installation:</p>
 <p>Each process is python Class (or it&#8217;s instance) with <strong>at least two methods</strong>:</p>
 <blockquote>
 <div><ul class="simple">
-<li><tt class="docutils literal"><span class="pre">__init__</span></tt> which initializes the process, where you will define
+<li><code class="docutils literal"><span class="pre">__init__</span></code> which initializes the process, where you will define
 inputs and outputs, and other stuff</li>
-<li><tt class="docutils literal"><span class="pre">execute</span></tt> which will be called, once PyWPS accepts Execute request
+<li><code class="docutils literal"><span class="pre">execute</span></code> which will be called, once PyWPS accepts Execute request
 type</li>
 </ul>
 </div></blockquote>
-<p>Start to edit file of name <tt class="docutils literal"><span class="pre">returner.py</span></tt> in the created processes
+<p>Start to edit file of name <code class="docutils literal"><span class="pre">returner.py</span></code> in the created processes
 directory:</p>
 <p>Let&#8217;s talk about it more deeply:</p>
 <div class="section" id="initialization">
 <h3>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h3>
-<p>The process is inherited from the <tt class="xref py py-class docutils literal"><span class="pre">pywps.Process.WPSProcess</span></tt> class.
+<p>The process is inherited from the <code class="xref py py-class docutils literal"><span class="pre">pywps.Process.WPSProcess</span></code> class.
 In Python, you must initialize this parent class at first place.</p>
 <p>In the initialization, you have to define</p>
 <blockquote>
@@ -117,22 +119,22 @@ input will accept only XML-encoded files, ideally <a class="reference external" 
 analyzed, imported to GRASS, translated using GDAL, transformed using OGR,
 interpolated using R. Here it happens.</p>
 <p>In our case, the &#8220;analysis&#8221; is pretty simple.</p>
-<p>We used the <tt class="xref py py-meth docutils literal"><span class="pre">getValue()</span></tt> method of data inputs and <tt class="xref py py-meth docutils literal"><span class="pre">setValue()</span></tt>
+<p>We used the <code class="xref py py-meth docutils literal"><span class="pre">getValue()</span></code> method of data inputs and <code class="xref py py-meth docutils literal"><span class="pre">setValue()</span></code>
 method of data outputs and just copied input values to output values.</p>
 <div class="section" id="reporting-some-error">
 <h4>Reporting some error<a class="headerlink" href="#reporting-some-error" title="Permalink to this headline">¶</a></h4>
-<p>If <tt class="xref py py-meth docutils literal"><span class="pre">execute()</span></tt> returns anything <strong>but</strong> null, it is considered as
+<p>If <code class="xref py py-meth docutils literal"><span class="pre">execute()</span></code> returns anything <strong>but</strong> null, it is considered as
 error and exception is called:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">return</span> <span class="s">&quot;Oups! Something went wrong&quot;</span>
+<div class="highlight-default"><div class="highlight"><pre><span class="k">return</span> <span class="s">&quot;Oups! Something went wrong&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="calling-command-line-utils">
 <h4>Calling command line utils<a class="headerlink" href="#calling-command-line-utils" title="Permalink to this headline">¶</a></h4>
 <p>In some case, you need to call command line utils. You can either use the
-<a class="reference external" href="http://docs.python.org/library/subprocess.html#module-subprocess" title="(in Python v2.7)"><tt class="xref py py-mod docutils literal"><span class="pre">subprocess</span></tt></a> module, or <tt class="xref py py-class docutils literal"><span class="pre">WPSProcess</span></tt> method
-<tt class="xref py py-meth docutils literal"><span class="pre">WPSProcess.cmd()</span></tt>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd</span><span class="p">([</span><span class="s">&quot;g.region&quot;</span><span class="p">,</span><span class="s">&quot;-g&quot;</span><span class="p">])</span>
+<a class="reference external" href="https://docs.python.org/2/library/subprocess.html#module-subprocess" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">subprocess</span></code></a> module, or <code class="xref py py-class docutils literal"><span class="pre">WPSProcess</span></code> method
+<code class="xref py py-meth docutils literal"><span class="pre">WPSProcess.cmd()</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd</span><span class="p">([</span><span class="s">&quot;g.region&quot;</span><span class="p">,</span><span class="s">&quot;-g&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -148,34 +150,34 @@ work with standard python interface of various programs.</p>
 </div>
 <div class="section" id="logging-and-debugging">
 <h4>Logging and debugging<a class="headerlink" href="#logging-and-debugging" title="Permalink to this headline">¶</a></h4>
-<p>Do not use <a class="reference external" href="http://docs.python.org/library/functions.html#print" title="(in Python v2.7)"><tt class="xref py py-func docutils literal"><span class="pre">print()</span></tt></a> function. Use <tt class="docutils literal"><span class="pre">logging</span></tt> package instead:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
+<p>Do not use <a class="reference external" href="https://docs.python.org/2/library/functions.html#print" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">print()</span></code></a> function. Use <code class="docutils literal"><span class="pre">logging</span></code> package instead:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Just information message&quot;</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Variable content: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">variable</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Error occured: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Variable content: %s&quot;</span> <span class="o">%</span> <span class="n">variable</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Error occured: %s&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If you set the file name in the configuration file, you should obtain the
 result there. Otherwise, you should be able to see something in the
-standard error file (e.g. <tt class="file docutils literal"><span class="pre">/var/log/apache2/error.log</span></tt>)</p>
+standard error file (e.g. <code class="file docutils literal"><span class="pre">/var/log/apache2/error.log</span></code>)</p>
 </div>
 </div>
 </div>
 <div class="section" id="registering-the-process-into-pywps-server">
 <h2>Registering the process into PyWPS server<a class="headerlink" href="#registering-the-process-into-pywps-server" title="Permalink to this headline">¶</a></h2>
 <p>Now, we should have following directory structure:</p>
-<div class="highlight-python"><div class="highlight"><pre>/usr/
-/usr/local/
-/usr/local/processes/
-/usr/local/processes/returner.py
+<div class="highlight-default"><div class="highlight"><pre><span class="o">/</span><span class="n">usr</span><span class="o">/</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">processes</span><span class="o">/</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">processes</span><span class="o">/</span><span class="n">returner</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>Since <tt class="file docutils literal"><span class="pre">processes</span></tt> are <em>python package</em>, <tt class="file docutils literal"><span class="pre">__init__.py</span></tt> file must
+<p>Since <code class="file docutils literal"><span class="pre">processes</span></code> are <em>python package</em>, <code class="file docutils literal"><span class="pre">__init__.py</span></code> file must
 be available. Every python module, which is part of the python package must
-be listed in the <tt class="docutils literal"><span class="pre">__all__</span></tt> array in the init file.</p>
-<p>Content of <tt class="file docutils literal"><span class="pre">/usr/local/process/__init__.py</span></tt>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;returner&quot;</span><span class="p">]</span>
+be listed in the <code class="docutils literal"><span class="pre">__all__</span></code> array in the init file.</p>
+<p>Content of <code class="file docutils literal"><span class="pre">/usr/local/process/__init__.py</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;returner&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -185,7 +187,7 @@ be listed in the <tt class="docutils literal"><span class="pre">__all__</span></
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -215,29 +217,28 @@ be listed in the <tt class="docutils literal"><span class="pre">__all__</span></
   <h4>Next topic</h4>
   <p class="topless"><a href="../testing/index.html"
                         title="next chapter">Testing the PyWPS and first process</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/process/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/process/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -249,12 +250,12 @@ be listed in the <tt class="docutils literal"><span class="pre">__all__</span></
         <li class="right" >
           <a href="../configuration/index.html" title="Configuration"
              >previous</a> |</li>
-        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PyWPS Course 3.x documentation</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
 </html>

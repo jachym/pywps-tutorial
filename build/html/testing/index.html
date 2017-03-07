@@ -6,9 +6,9 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Testing the PyWPS and first process &mdash; PyWPS Course 3.x documentation</title>
+    <title>Testing the PyWPS and first process &#8212; PyWPS Course 3.x documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,12 +23,14 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="PyWPS Course 3.x documentation" href="../index.html" />
     <link rel="next" title="Deploying PyWPS on the server" href="../server/index.html" />
     <link rel="prev" title="Writing custom WPS Process" href="../process/index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -40,27 +42,27 @@
         <li class="right" >
           <a href="../process/index.html" title="Writing custom WPS Process"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PyWPS Course 3.x documentation</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="testing-the-pywps-and-first-process">
 <h1>Testing the PyWPS and first process<a class="headerlink" href="#testing-the-pywps-and-first-process" title="Permalink to this headline">¶</a></h1>
 <p>The very first test can be done in the command line. Before we start,
 several environment variables have to be set:</p>
-<div class="highlight-python"><div class="highlight"><pre>export PYWPS_PROCESSES=/usr/local/processes/
-export PYWPS_CFG=/usr/local/processes/pywps.cfg
+<div class="highlight-default"><div class="highlight"><pre><span class="n">export</span> <span class="n">PYWPS_PROCESSES</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">processes</span><span class="o">/</span>
+<span class="n">export</span> <span class="n">PYWPS_CFG</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">processes</span><span class="o">/</span><span class="n">pywps</span><span class="o">.</span><span class="n">cfg</span>
 </pre></div>
 </div>
 <div class="section" id="getcapabilities">
 <h2>GetCapabilities<a class="headerlink" href="#getcapabilities" title="Permalink to this headline">¶</a></h2>
 <p>Now we can run the wps.py binary from the command line:</p>
-<div class="highlight-python"><div class="highlight"><pre>/usr/local/pywps/wps.py &quot;service=wps&amp;request=getcapabilities&quot;
+<div class="highlight-default"><div class="highlight"><pre><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">pywps</span><span class="o">/</span><span class="n">wps</span><span class="o">.</span><span class="n">py</span> <span class="s">&quot;service=wps&amp;request=getcapabilities&quot;</span>
 </pre></div>
 </div>
 <p>You should obtain following text.</p>
@@ -99,11 +101,11 @@ export PYWPS_CFG=/usr/local/processes/pywps.cfg
 <span class="nt">&lt;/wps:Capabilities&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<p>You see, that <tt class="docutils literal"><span class="pre">returner</span></tt> process is available</p>
+<p>You see, that <code class="docutils literal"><span class="pre">returner</span></code> process is available</p>
 </div>
 <div class="section" id="describeprocess">
 <h2>DescribeProcess<a class="headerlink" href="#describeprocess" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>/usr/local/pywps/wps.py &quot;service=wps&amp;version=1.0.0&amp;request=describeprocess&amp;identifier=returner&quot;
+<div class="highlight-default"><div class="highlight"><pre><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">pywps</span><span class="o">/</span><span class="n">wps</span><span class="o">.</span><span class="n">py</span> <span class="s">&quot;service=wps&amp;version=1.0.0&amp;request=describeprocess&amp;identifier=returner&quot;</span>
 </pre></div>
 </div>
 <p>We now can see process inputs definition</p>
@@ -216,16 +218,16 @@ export PYWPS_CFG=/usr/local/processes/pywps.cfg
 <div class="section" id="execute">
 <h2>Execute<a class="headerlink" href="#execute" title="Permalink to this headline">¶</a></h2>
 <p>Finally, let the process be executed:</p>
-<div class="highlight-python"><div class="highlight"><pre>/usr/local/pywps/wps.py &quot;service=wps&amp;version=1.0.0&amp;request=execute&amp;identifier=returner&amp;datainputs=[text=1;data=http://apps.esdi-humboldt.cz/classification/traning_areas/training_areas_en.gml]&quot;
+<div class="highlight-default"><div class="highlight"><pre><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">pywps</span><span class="o">/</span><span class="n">wps</span><span class="o">.</span><span class="n">py</span> <span class="s">&quot;service=wps&amp;version=1.0.0&amp;request=execute&amp;identifier=returner&amp;datainputs=[text=1;data=http://apps.esdi-humboldt.cz/classification/traning_areas/training_areas_en.gml]&quot;</span>
 </pre></div>
 </div>
 <p>First thing you see, is bunch of INFOs about current process status:</p>
-<div class="highlight-python"><div class="highlight"><pre>PyWPS INFO: Reading processes from [/home/jachym/usr/src/pywps/processes/course/]
-PyWPS INFO: Following processes are imported: [&#39;returner&#39;]
-PyWPS INFO: Status [processpaused]: Getting input text of process returner
-PyWPS INFO: Status [processpaused]: Getting input data of process returner
-PyWPS INFO: Status [processstarted][0.0]: Process returner started
-PyWPS INFO: Status [processsucceeded]: PyWPS Process returner successfully calculated
+<div class="highlight-default"><div class="highlight"><pre><span class="n">PyWPS</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Reading</span> <span class="n">processes</span> <span class="kn">from</span> <span class="p">[</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">jachym</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">pywps</span><span class="o">/</span><span class="n">processes</span><span class="o">/</span><span class="n">course</span><span class="o">/</span><span class="p">]</span>
+<span class="n">PyWPS</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Following</span> <span class="n">processes</span> <span class="n">are</span> <span class="n">imported</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;returner&#39;</span><span class="p">]</span>
+<span class="n">PyWPS</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Status</span> <span class="p">[</span><span class="n">processpaused</span><span class="p">]:</span> <span class="n">Getting</span> <span class="nb">input</span> <span class="n">text</span> <span class="n">of</span> <span class="n">process</span> <span class="n">returner</span>
+<span class="n">PyWPS</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Status</span> <span class="p">[</span><span class="n">processpaused</span><span class="p">]:</span> <span class="n">Getting</span> <span class="nb">input</span> <span class="n">data</span> <span class="n">of</span> <span class="n">process</span> <span class="n">returner</span>
+<span class="n">PyWPS</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Status</span> <span class="p">[</span><span class="n">processstarted</span><span class="p">][</span><span class="mf">0.0</span><span class="p">]:</span> <span class="n">Process</span> <span class="n">returner</span> <span class="n">started</span>
+<span class="n">PyWPS</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">Status</span> <span class="p">[</span><span class="n">processsucceeded</span><span class="p">]:</span> <span class="n">PyWPS</span> <span class="n">Process</span> <span class="n">returner</span> <span class="n">successfully</span> <span class="n">calculated</span>
 </pre></div>
 </div>
 <p>And afterwards, the resulting XML will come</p>
@@ -303,7 +305,7 @@ PyWPS INFO: Status [processsucceeded]: PyWPS Process returner successfully calcu
 <p>You can see, that the output XML  response contains the resulting GML. We
 can request the <strong>reference</strong> to it, put this at the end of previous request
 string:</p>
-<div class="highlight-python"><div class="highlight"><pre>&amp;responseform=responsedocument=[output=@asreference=true]
+<div class="highlight-default"><div class="highlight"><pre><span class="o">&amp;</span><span class="n">responseform</span><span class="o">=</span><span class="n">responsedocument</span><span class="o">=</span><span class="p">[</span><span class="n">output</span><span class="o">=</span><span class="nd">@asreference</span><span class="o">=</span><span class="n">true</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>And you get</p>
@@ -324,7 +326,7 @@ process</a></p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -345,29 +347,28 @@ process</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../server/index.html"
                         title="next chapter">Deploying PyWPS on the server</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/testing/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/testing/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -379,12 +380,12 @@ process</a></p>
         <li class="right" >
           <a href="../process/index.html" title="Writing custom WPS Process"
              >previous</a> |</li>
-        <li><a href="../index.html">PyWPS Course 3.x documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PyWPS Course 3.x documentation</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Jachym Cepicky &amp; PyWPS Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
 </html>
